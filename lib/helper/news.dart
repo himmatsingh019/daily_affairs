@@ -7,7 +7,7 @@ class News {
 
   Future<void> getNews() async {
     var url = Uri.parse(
-        'https://newsapi.org/v2/top-headlines?country=in&apiKey=0d1e6eee171840c9b2e96b777e540a66');
+        'https://newsapi.org/v2/top-headlines?country=us&apiKey=0d1e6eee171840c9b2e96b777e540a66');
 
     var response = await http.get(url);
 
@@ -15,15 +15,15 @@ class News {
 
     if (jsonData['status'] == "ok") {
       jsonData["articles"].forEach((element) {
-        if (element["urlToImage"] != null && element["description"] != null) {
-          NewsModel newsModel = new NewsModel(
-            content: element['content'],
-            imgURL: element['urlToImage'],
+        if (element['urlToImage'] != null && element['description'] != null) {
+          NewsModel article = new NewsModel(
             title: element['title'],
-            url: element['url'],
             description: element['description'],
+            imgURL: element['urlToImage'],
+            // content: element["content"],
+            articleUrl: element["url"],
           );
-          news.add(newsModel);
+          news.add(article);
         }
       });
     }

@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     getNews();
   }
 
-  getNews() async {
+  void getNews() async {
     News newsClass = News();
     await newsClass.getNews();
     news = newsClass.news;
@@ -41,14 +41,14 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Flutter',
+              'Daily',
               style: TextStyle(
                 color: Colors.black,
               ),
             ),
             SizedBox(width: 4),
             Text(
-              'News',
+              'Affairs',
               style: TextStyle(
                 color: Colors.blue,
               ),
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -74,27 +74,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              child: Column(
-                children: [
-                  Container(
-                    height: 140,
-                    child: ListView.builder(
-                      itemCount: news.length,
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return BlogTile(
-                          imgUrl: news[index].imgURL,
-                          title: news[index].title,
-                          desc: news[index].description,
-                          url: news[index].url,
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
+              margin: EdgeInsets.only(top: 16),
+              child: ListView.builder(
+                  itemCount: news.length,
+                  shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return BlogTile(
+                      imgUrl: news[index].imgURL,
+                      title: news[index].title,
+                      desc: news[index].description,
+                    );
+                  }),
+            )
           ],
         ),
       ),
@@ -110,8 +102,6 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.only(left: 8, top: 8, right: 4),
       child: Column(
         children: [
@@ -131,30 +121,52 @@ class CategoryTile extends StatelessWidget {
 }
 
 class BlogTile extends StatelessWidget {
-  final imgUrl, title, desc, url;
+  final imgUrl, title, desc;
 
   const BlogTile({
     Key? key,
     required this.imgUrl,
     required this.title,
     required this.desc,
-    required this.url,
+    // required this.url,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(left: 8, right: 8, bottom: 12),
+      width: MediaQuery.of(context).size.width,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(imgUrl),
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              imgUrl,
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.cover,
             ),
           ),
-          Text(title),
-          Text(desc),
+          SizedBox(height: 8),
+          Text(
+            title,
+            maxLines: 2,
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            desc,
+            maxLines: 2,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey[800],
+            ),
+          ),
         ],
       ),
     );
