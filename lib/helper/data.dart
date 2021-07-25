@@ -1,4 +1,4 @@
-import 'package:flutter_news/helper/category_model.dart';
+import 'package:flutter_news/models/category_model.dart';
 
 List<CategoryModel> getCategories() {
   List<CategoryModel> category = new List.empty(growable: true);
@@ -6,7 +6,7 @@ List<CategoryModel> getCategories() {
   CategoryModel categoryModel = new CategoryModel();
 
   //1
-  categoryModel.categoryName = 'Buisness';
+  categoryModel.categoryName = 'Business';
   categoryModel.imgURL =
       "https://image.freepik.com/free-photo/businessman-pointing-arrow-graph-corporate-future-growth-plan-increase-percentage_20693-179.jpg";
   category.add(categoryModel);
@@ -30,6 +30,13 @@ List<CategoryModel> getCategories() {
   categoryModel.categoryName = 'Health';
   categoryModel.imgURL =
       "http://clipart-library.com/images_k/health-clipart-transparent/health-clipart-transparent-1.png";
+  category.add(categoryModel);
+
+  //5
+  categoryModel = new CategoryModel();
+  categoryModel.categoryName = 'Science';
+  categoryModel.imgURL =
+      "https://clipartix.com/wp-content/uploads/2016/04/Science-clip-art-molecules.png";
   category.add(categoryModel);
   return category;
 }
