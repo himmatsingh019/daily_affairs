@@ -96,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             imgUrl: news[index].imgURL,
                             title: news[index].title,
                             desc: news[index].description,
+                            url: news[index].articleUrl,
                           );
                         }),
                   )

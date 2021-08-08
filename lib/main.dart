@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news/screens/categorynews.dart';
 
 import 'screens/home.dart';
 
@@ -16,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       initialRoute: '/home',
+      theme: ThemeData(primaryColor: Colors.white),
       routes: {
         '/home': (context) => HomeScreen(),
       },
