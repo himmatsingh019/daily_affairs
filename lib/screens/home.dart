@@ -1,3 +1,4 @@
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/models/category_model.dart';
@@ -21,10 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    _isloading = true;
-
-    // TODO: implement initState
     super.initState();
+    _isloading = true;
     categories = getCategories();
     getNews();
   }
@@ -41,6 +40,18 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              EasyDynamicTheme.of(context).changeTheme();
+            },
+            icon: Icon(Icons.dark_mode_outlined),
+            color: Colors.black,
+            splashRadius: .1,
+          )
+        ],
         backgroundColor: Colors.white,
         elevation: 0,
         title: Row(

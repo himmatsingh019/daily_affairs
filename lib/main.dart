@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'screens/home.dart';
+import 'constants/theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    EasyDynamicThemeWidget(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeMode: EasyDynamicTheme.of(context).themeMode,
+      darkTheme: darkTheme,
+      theme: lightTheme,
       initialRoute: '/home',
-      theme: ThemeData(primaryColor: Colors.white),
       routes: {
         '/home': (context) => HomeScreen(),
       },
