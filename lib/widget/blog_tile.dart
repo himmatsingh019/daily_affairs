@@ -32,20 +32,17 @@ class BlogTile extends StatelessWidget {
           Text(
             title,
             maxLines: 2,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.headline1!.copyWith(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
           ),
           SizedBox(height: 4),
           Text(
             desc,
             maxLines: 2,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[800],
-            ),
+            style:
+                Theme.of(context).textTheme.bodyText1!.copyWith(fontSize: 14),
           ),
         ],
       ),

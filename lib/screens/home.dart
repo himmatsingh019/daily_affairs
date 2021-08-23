@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<CategoryModel> categories = new List.empty(growable: true);
   List<NewsModel> news = new List.empty(growable: true);
   bool _isloading = false;
+  bool _isDark = false;
 
   @override
   void initState() {
@@ -45,14 +46,22 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              EasyDynamicTheme.of(context).changeTheme();
+              if (_isDark == false) {
+                EasyDynamicTheme.of(context).changeTheme(dark: false);
+                setState(() {
+                  _isDark = true;
+                });
+              } else {
+                EasyDynamicTheme.of(context).changeTheme(dark: true);
+                _isDark = false;
+              }
             },
             icon: Icon(Icons.dark_mode_outlined),
             color: Colors.black,
             splashRadius: .1,
           )
         ],
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               'Daily',
               style: TextStyle(
-                color: Colors.black,
+                color: _isDark ? Colors.white : Colors.black,
               ),
             ),
             SizedBox(width: 4),

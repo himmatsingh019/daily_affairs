@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter_news/models/category_news_model.dart';
 import 'package:flutter_news/models/news_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +20,6 @@ class News {
             title: element['title'],
             description: element['description'],
             imgURL: element['urlToImage'],
-            // content: element["content"],
             articleUrl: element["url"],
           );
           news.add(article);
